@@ -1,19 +1,19 @@
 #' init
 
-#' The funtion initializes the soil dischareg
+#' The funtion initializes the soil discharge
 #' Unit is in m3/s
 #' @param MAD Mean Annual Discharge values
 #' @param q1 first value of the runoff timeserie
 #' @param D volume of the unsaturated zone
 #' @param Timeresinsec time resolution of the process in second (1hour: 3600s, ... etc)
 #' @param modelArea list of parameters about the area
-#'  list(totarea=a,slopesriverarea=b,nobognoglacarea=c,bogarea=d)
+#'  list(totarea,slopesriverarea,nobognoglacarea,bogarea)
 #' @param modelLayer list of parameters about the Layers
-#'  list(maxL=a,speed=b,nbStepsDelay=c,z=d,distr="dexp",param=c(e), NoL=f)
+#'  list(maxL,speed,nbStepsDelay,z,distr,param,NoL)
 #' @param modelRiver list of parameters about the river
-#'  list(maxL=a,speed=b,nbStepsDelay=c ,z=d,distr="dnorm",param=c(e,f))
+#'  list(maxL,speed,nbStepsDelay,z,distr,param)
 #' @param modelBog list of parameters of the bog
-#'  list(maxL=a,speed=b,nbStepsDelay=c,z=d,distr="dexp",param=c(e))
+#'  list(maxL,speed,nbStepsDelay,z,dist,param)
 #' @param layerUH Unit Hydrograph of the saturation layers
 #' @param NoL number of level zone
 #' @param UHriver Unit Hydrograp of the river
