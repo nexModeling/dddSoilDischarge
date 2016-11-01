@@ -1,6 +1,6 @@
 #' state of soil discharge
 #'
-#' The function \code{stateX()} process the soil discharge:
+#' The function \code{stateX.soilDischarge()} process the soil discharge:
 #' 1- process the soil discharge of slopes
 #' 2- process the soil discharge of bogs
 #' 3- process the accumulated discharge with a dynamic
@@ -23,7 +23,7 @@
 #' \dontrun{
 #' stateX()
 #' }
-stateX <-function(Timeresinsec,
+stateX.soilDischarge <-function(Timeresinsec,
                   layerUH,
                   ddist,
                   UHriver,

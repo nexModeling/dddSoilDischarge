@@ -33,7 +33,6 @@ init.soilDischarge <-function(method=NULL,path=NULL,qsimutx=NULL,qsimX=NULL,MAD=
     "manual"    = init.manual(D=D,qsimutx=qsimutx,qsimX=qsimX),
     "processed" = init.processed(MAD=MAD,q1=q1,D=D,Timeresinsec=Timeresinsec,modelArea=modelArea,modelLayer=modelLayer,modelRiver=modelRiver,modelBog=modelBog,layerUH=layerUH,UHriver=UHriver),
     "load"      = init.load(path=path),
-    "source"    = init.source(path=path),
     (message=paste0("Invalid method:", method,".")))
 
   return(soilDischarge)
@@ -53,12 +52,6 @@ init.load <- function(path){
 }
 
 
-init.source <- function(path){
-  source(paste0(path,"soilDischarge.R"),local=TRUE)
-  return(soilDischarge)
-}
-
-
 init.processed <-function(MAD,q1,D,Timeresinsec,modelArea,modelLayer,modelRiver,modelBog,layerUH,UHriver){
    if ( (!is.null(MAD)) && (!is.null(q1)) && (!is.null(D)) && (!is.null(Timeresinsec)) &&
         (!is.null(modelArea)) && (!is.null(modelLayer)) && (!is.null(modelBog)) &&
@@ -71,7 +64,7 @@ init.processed <-function(MAD,q1,D,Timeresinsec,modelArea,modelLayer,modelRiver,
     MAD1    <- ifelse(q1 > 0, q1, MAD) #m3/s
     D_MAD       <- sdis.D(q=MAD1,Timeresinsec=Timeresinsec,area=modelArea$slopesriverarea)
 
-    qsimutxInit <- stateX(Timeresinsec = Timeresinsec,
+    qsimutxInit <- stateX.soilDischarge(Timeresinsec = Timeresinsec,
                           layerUH = layerUH,
                           ddist = rep(1/modelLayer$NoL,modelLayer$NoL),
                           UHriver = UHriver,
