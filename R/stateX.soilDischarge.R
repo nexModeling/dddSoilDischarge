@@ -67,7 +67,8 @@ stateX.soilDischarge <-function(Timeresinsec,
         qsimX[1:(length(qsimutx))] <- qsimX[1:(length(qsimutx))] + qsimutx[1:(length(qsimutx))]
     } else if(length(qsimutx)==1) qsimX[1] <-qsimutx[1]
 
-    res <- list(qsimX = qsimX,
+    res <- list(D = (-1)*ddistAll$S,
+                qsimX = qsimX,
                 qsimutx = qsimutx)
 
     return(res)
