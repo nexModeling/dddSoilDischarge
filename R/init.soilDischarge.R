@@ -47,7 +47,10 @@ init.manual <- function(D,qsimutx,qsimX){
 }
 
 init.load <- function(path){
-  load(paste0(path,"soilDischarge.rda"))
+  env <- environment()
+  path <- normalizePath(file.path(path,"soilDischarge.rda"),mustWork = FALSE)
+  load(path, envir=env)
+  soilDischarge <- get("soilDischarge",envir = env)
   return(soilDischarge)
 }
 
