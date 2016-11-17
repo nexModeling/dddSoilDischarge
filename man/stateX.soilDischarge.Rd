@@ -4,15 +4,15 @@
 \alias{stateX.soilDischarge}
 \title{state of soil discharge}
 \usage{
-stateX.soilDischarge(Timeresinsec, layerUH, ddist, UHriver, waterContent, area,
-  modelBog, waterContentBog, areabog, qsimX)
+stateX.soilDischarge(Timeresinsec, layerUH, ddistAll, UHriver, waterContent,
+  area, modelBog, waterContentBog, areabog, qsimX)
 }
 \arguments{
 \item{Timeresinsec}{time resolution of the process in second (1hour: 3600s, ... etc)}
 
 \item{layerUH}{Unit Hydrograph of the saturation layers}
 
-\item{ddist}{states of each saturation level}
+\item{ddistAll}{states of each saturation level}
 
 \item{UHriver}{Unit Hydrograp of the river}
 
