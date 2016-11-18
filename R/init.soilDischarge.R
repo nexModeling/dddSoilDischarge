@@ -19,6 +19,7 @@
 #' @param modelBog list of parameters of the bog
 #'  list(maxL,speed,nbStepsDelay,z,dist,param)
 #' @param layerUH Unit Hydrograph of the saturation layers
+#' @param ddistAll state of the saturation layers
 #' @param UHriver Unit Hydrograp of the river
 #' @keywords soilDischarge
 #' @export
@@ -27,11 +28,11 @@
 #' init.soilDischarge()
 #' }
 
-init.soilDischarge <-function(method=NULL,path=NULL,qsimutx=NULL,qsimX=NULL,MAD=NULL,q1=NULL,D=NULL,Timeresinsec=NULL,modelArea=NULL,modelLayer=NULL,modelRiver=NULL,modelBog=NULL,layerUH=NULL,UHriver=NULL){
+init.soilDischarge <-function(method=NULL,path=NULL,qsimutx=NULL,qsimX=NULL,MAD=NULL,q1=NULL,D=NULL,Timeresinsec=NULL,modelArea=NULL,modelLayer=NULL,modelRiver=NULL,modelBog=NULL,layerUH=NULL,ddistAll=NULL,UHriver=NULL){
 
   soilDischarge <- switch(method,
     "manual"    = init.manual(D=D,qsimutx=qsimutx,qsimX=qsimX),
-    "processed" = init.processed(MAD=MAD,q1=q1,D=D,Timeresinsec=Timeresinsec,modelArea=modelArea,modelLayer=modelLayer,modelRiver=modelRiver,modelBog=modelBog,layerUH=layerUH,UHriver=UHriver),
+    "processed" = init.processed(MAD=MAD,q1=q1,D=D,Timeresinsec=Timeresinsec,modelArea=modelArea,modelLayer=modelLayer,modelRiver=modelRiver,modelBog=modelBog,layerUH=layerUH,ddistAll=ddistAll,UHriver=UHriver),
     "load"      = init.load(path=path),
     (message=paste0("Invalid method:", method,".")))
 
@@ -55,7 +56,7 @@ init.load <- function(path){
 }
 
 
-init.processed <-function(MAD,q1,D,Timeresinsec,modelArea,modelLayer,modelRiver,modelBog,layerUH,UHriver){
+init.processed <-function(MAD,q1,D,Timeresinsec,modelArea,modelLayer,modelRiver,modelBog,layerUH,ddistAll,UHriver){
    if ( (!is.null(MAD)) && (!is.null(q1)) && (!is.null(D)) && (!is.null(Timeresinsec)) &&
         (!is.null(modelArea)) && (!is.null(modelLayer)) && (!is.null(modelBog)) &&
         (!is.null(layerUH)) && (!is.null(UHriver)) ){
@@ -69,7 +70,7 @@ init.processed <-function(MAD,q1,D,Timeresinsec,modelArea,modelLayer,modelRiver,
 
     qsimutxInit <- stateX.soilDischarge(Timeresinsec = Timeresinsec,
                           layerUH = layerUH,
-                          ddist = rep(1/modelLayer$NoL,modelLayer$NoL),
+                          ddistAll = ddistAll,
                           UHriver = UHriver,
                           waterContent = D_MAD,
                           area = modelArea$slopesriverarea,

@@ -7,7 +7,7 @@
 #' Unit is in m3/s
 #' @param Timeresinsec time resolution of the process in second (1hour: 3600s, ... etc)
 #' @param layerUH Unit Hydrograph of the saturation layers
-#' @param ddist states of each saturation level
+#' @param ddistAll states of each saturation level
 #' @param UHriver Unit Hydrograp of the river
 #' @param waterContent excess of water in millimeters over Slopes
 #' @param area in squared meters
@@ -25,7 +25,7 @@
 #' }
 stateX.soilDischarge <-function(Timeresinsec,
                   layerUH,
-                  ddist,
+                  ddistAll,
                   UHriver,
                   waterContent,
                   area,
@@ -38,7 +38,7 @@ stateX.soilDischarge <-function(Timeresinsec,
     #########################
     qslopes <- sdis.slopes(Timeresinsec=Timeresinsec,
                                       layerUH=layerUH,
-                                      ddist=ddist,
+                                      ddist=ddistAll$ddist,
                                       UHriver=UHriver,
                                       waterContent=waterContent,
                                       area=area)
@@ -67,7 +67,8 @@ stateX.soilDischarge <-function(Timeresinsec,
         qsimX[1:(length(qsimutx))] <- qsimX[1:(length(qsimutx))] + qsimutx[1:(length(qsimutx))]
     } else if(length(qsimutx)==1) qsimX[1] <-qsimutx[1]
 
-    res <- list(qsimX = qsimX,
+    res <- list(D = (-1)*ddistAll$S,
+                qsimX = qsimX,
                 qsimutx = qsimutx)
 
     return(res)
